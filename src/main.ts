@@ -31,7 +31,7 @@ mute.addEventListener('click', () => {
 
 // camera init
 const fov = 75
-const aspect = 2
+const aspect = canvas.clientWidth / canvas.clientHeight
 const near = 0.1
 const far = 100
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
@@ -87,6 +87,9 @@ function render(time: number) {
     if (grid.position.z > 10) grid.position.z = 0
 
     renderer.setSize(window.innerWidth, window.innerHeight)
+    camera.aspect = canvas.clientWidth / canvas.clientHeight
+    camera.updateProjectionMatrix()
+
     renderer.render(scene, camera)
     requestAnimationFrame(render)
 }
